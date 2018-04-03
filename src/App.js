@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MenuConfig from './menu.config';
 import {Link} from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd';
+import routers from "./routers";
 const { Header, Content, Footer, Sider } = Layout,
     {SubMenu} = Menu;
 class App extends Component {
@@ -51,8 +52,8 @@ class App extends Component {
               </Sider>
               <Layout>
                   <Header style={{ background: '#fff', padding: 0 }} />
-                  <Content style={{ margin: '24px 16px 0', overflow: 'initial',minHeight:400 }}>
-                      {this.props.children}
+                  <Content style={{ margin: '24px 16px 0', overflow: 'auto',maxHeight:460}}>
+                      {routers}
                   </Content>
                   <Footer style={{ textAlign: 'center' }}>
                       Ant Design ©2016 Created by Ant UED

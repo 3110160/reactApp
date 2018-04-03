@@ -5,8 +5,8 @@ const routers =(
     <div>
         {routerList.map((item,index)=><Route
             key={index}
-            exact={item.exact}
-            path={item.path}
+            exact={false}
+            path={'/manage'+item.path}
             component={item.component} />)}
     </div>
 );

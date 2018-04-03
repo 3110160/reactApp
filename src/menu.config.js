@@ -4,81 +4,13 @@ const MenuConfig = [
         icon:'weibo-circle',
         menus:[
             {
-                name:'menu1-1',
-                path:'/home',
+                name:'新增bolg',
+                path:'/manage/editor',
                 icon:'taobao-circle'
             },{
                 name:'menu1-2',
-                path:'/details/1',
+                path:'/manage/details',
                 icon:'dribbble'
-            },{
-                name:'menu1-3',
-                path:'/home',
-                icon:'zhihu'
-            },{
-                name:'menu1-4',
-                path:'/home',
-                icon:'slack'
-            }
-        ]
-    },{
-        name:'menu2',
-        path:'/home',
-        icon:'html5',
-        menus:[
-            {
-                name:'menu2-1',
-                path:'/home',
-                icon:'facebook'
-            },{
-                name:'menu1-2',
-                path:'/home',
-                icon:'dropbox'
-            }
-        ]
-    },{
-        name:'menu3',
-        path:'/home',
-        icon:'qq',
-        menus:[
-            {
-                name:'menu3-1',
-                path:'/home',
-                icon:'gitlab'
-            },{
-                name:'menu3-2',
-                path:'/home',
-                icon:'codepen-circle'
-            }
-        ]
-    },{
-        name:'menu4',
-        path:'/home',
-        icon:'yuque',
-        menus:[
-            {
-                name:'menu4-1',
-                path:'/home',
-                icon:'chrome'
-            },{
-                name:'menu4-2',
-                path:'/home',
-                icon:'aliwangwang'
-            }
-        ]
-    },{
-        name:'menu5',
-        path:'/home',
-        icon:'wechat',
-        menus:[
-            {
-                name:'menu5-1',
-                path:'/home',
-                icon:'android'
-            },{
-                name:'menu5-2',
-                path:'/home',
-                icon:'github'
             }
         ]
     }
