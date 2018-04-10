@@ -17,8 +17,8 @@ import 'nprogress/nprogress.css'
 /*NProgress.start();
 setTimeout(()=>{NProgress.done();},2000);*/
 
-// 添加响应拦截器
-/*axios.interceptors.response.use(function (response) {
+//todo 添加响应拦截器
+axios.interceptors.response.use(function (response) {
     if(response.data.code === -1){
         //登陆态失效
         message.error('请重新登陆');
@@ -28,7 +28,7 @@ setTimeout(()=>{NProgress.done();},2000);*/
 }, function (error) {
     // 对响应错误做点什么
     return Promise.reject(error);
-});*/
+});
 
 ReactDOM.render(
     <Router>

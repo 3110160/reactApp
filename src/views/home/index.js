@@ -7,28 +7,104 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            previewVisible: false,
-            previewImage: '',
-            fileList: []
+            articlesList: [],
+            userList: [],
         };
     }
 
     componentDidMount() {
-
+        this.getBlogList();
+        this.getUserList();
     }
 
-    getUserInfo() {
-        axios.get('/user', {
+    //todo 获取文章列表
+    getBlogList() {
+        axios.get('/getBlogList', {
             params: {
-                id: 1
+                pageNum: 1,
+                pageSize: 5
             }
         }).then(res => {
-            console.log(res)
+            console.log(res.data.result.list)
+            this.setState({
+                articlesList:res.data.result.list
+            })
         })
     }
 
+    //todo 获取作者列表
+    getUserList() {
+        axios.get('/getBlogUserList')
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    userList:res.data.result.list
+                })
+            })
+    }
+
+    _renderArticles(articlesList) {
+      return articlesList.length?
+            articlesList.map((item,index)=>{
+                return (
+                    <div className='showBox' key={index}>
+                        <div className='left'>
+                            <div className='info'>
+                                <Avatar icon="user"/>
+                                <span style={{color: '#333333', fontSize: 12, marginLeft: 8}}>{item.user_name}</span>
+                                <span style={{color: '#999999', fontSize: 12, marginLeft: 8}}>{item.createtime}</span>
+                            </div>
+                            <div className='articleTitle'>
+                                <div>{item.article_title}</div>
+                            </div>
+                            <div className='Fragment'>
+                                <p>{item.article_desc}</p>
+                            </div>
+                            <div className='footer'>
+                        <span>
+                            <Icon type="heart"/>
+                            <i>{item.love_count}</i>
+                        </span>
+                                <span>
+                            <Icon type="message"/>
+                            <i>{item.comment_count}</i>
+                        </span>
+                            </div>
+                        </div>
+                        <div className='right'>
+                            {/*<div className='imgBox'>
+                                <img
+                                    src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1288375098,338412828&fm=173&app=12&f=JPEG?w=218&h=146&s=67409947C62A0515078A302A03001012"
+                                    alt=""/>
+                            </div>*/}
+                        </div>
+                    </div>
+                )
+            }):''
+    }
+
+    _renderUsers(userList){
+        return userList.map((item,index)=>{
+            return <div className='block' key={index}>
+                <div className='avatar'>
+                    <Avatar size='large' icon="user"/>
+                </div>
+                <div style={{marginLeft: 5}}>
+                    <div className="infoTop">
+                        <span>{item.user_name}</span>
+                        <a href='javascript:void(0)' className='guanz'>+关注</a>
+                    </div>
+                    <div className='authorsInfo'>
+                        <span>写了{item.article_count}篇</span>
+                        <span>获得{item.love_count}个喜欢</span>
+                    </div>
+                </div>
+            </div>
+        })
+    }
 
     render() {
+        let {articlesList,userList} = this.state;
         return (
             <div className='blogHome'>
                 <div className='topics'>
@@ -46,187 +122,13 @@ class Home extends Component {
                 <div className='content'>
                     <div className='leftContent'>
                         <div className='articleList'>
-                            <div className='showBox'>
-                                <div className='left'>
-                                    <div className='info'>
-                                        <Avatar icon="user"/>
-                                        <span style={{color: '#333333', fontSize: 12, marginLeft: 8}}>余博文</span>
-                                        <span style={{color: '#999999', fontSize: 12, marginLeft: 8}}>2018-04-03</span>
-                                    </div>
-                                    <div className='articleTitle'>
-                                        <div>我～走出去了</div>
-                                    </div>
-                                    <div className='Fragment'>
-                                        <p>三原则：图原创，文原创，诗原创。 一扇门 推开是红尘 关上是浮生 一个人 红尘惆怅客 浮生寂寞人</p>
-                                    </div>
-                                    <div className='footer'>
-                                        <span>
-                                            <Icon type="heart"/>
-                                            <i>3</i>
-                                        </span>
-                                        <span>
-                                            <Icon type="message" />
-                                            <i>100</i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className='right'>
-                                    <div className='imgBox'>
-                                        <img
-                                            src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1288375098,338412828&fm=173&app=12&f=JPEG?w=218&h=146&s=67409947C62A0515078A302A03001012"
-                                            alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='showBox'>
-                                <div className='left'>
-                                    <div className='info'>
-                                        <Avatar icon="user"/>
-                                        <span style={{color: '#333333', fontSize: 12, marginLeft: 8}}>余博文</span>
-                                        <span style={{color: '#999999', fontSize: 12, marginLeft: 8}}>2018-04-03</span>
-                                    </div>
-                                    <div className='articleTitle'>
-                                        <div>我～走出去了</div>
-                                    </div>
-                                    <div className='Fragment'>
-                                        <p>三原则：图原创，文原创，诗原创。 一扇门 推开是红尘 关上是浮生 一个人 红尘惆怅客 浮生寂寞人</p>
-                                    </div>
-                                    <div className='footer'>
-                                        <span>
-                                            <Icon type="heart"/>
-                                            <i>3</i>
-                                        </span>
-                                        <span>
-                                            <Icon type="message" />
-                                            <i>100</i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className='right'>
-                                    <div className='imgBox'>
-                                        <img
-                                            src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1288375098,338412828&fm=173&app=12&f=JPEG?w=218&h=146&s=67409947C62A0515078A302A03001012"
-                                            alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='showBox'>
-                                <div className='left'>
-                                    <div className='info'>
-                                        <Avatar icon="user"/>
-                                        <span style={{color: '#333333', fontSize: 12, marginLeft: 8}}>余博文</span>
-                                        <span style={{color: '#999999', fontSize: 12, marginLeft: 8}}>2018-04-03</span>
-                                    </div>
-                                    <div className='articleTitle'>
-                                        <div>我～走出去了</div>
-                                    </div>
-                                    <div className='Fragment'>
-                                        <p>三原则：图原创，文原创，诗原创。 一扇门 推开是红尘 关上是浮生 一个人 红尘惆怅客 浮生寂寞人</p>
-                                    </div>
-                                    <div className='footer'>
-                                        <span>
-                                            <Icon type="heart"/>
-                                            <i>3</i>
-                                        </span>
-                                        <span>
-                                            <Icon type="message" />
-                                            <i>100</i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className='right'>
-                                    <div className='imgBox'>
-                                        <img
-                                            src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1288375098,338412828&fm=173&app=12&f=JPEG?w=218&h=146&s=67409947C62A0515078A302A03001012"
-                                            alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='showBox'>
-                                <div className='left'>
-                                    <div className='info'>
-                                        <Avatar icon="user"/>
-                                        <span style={{color: '#333333', fontSize: 12, marginLeft: 8}}>余博文</span>
-                                        <span style={{color: '#999999', fontSize: 12, marginLeft: 8}}>2018-04-03</span>
-                                    </div>
-                                    <div className='articleTitle'>
-                                        <div>我～走出去了</div>
-                                    </div>
-                                    <div className='Fragment'>
-                                        <p>三原则：图原创，文原创，诗原创。 一扇门 推开是红尘 关上是浮生 一个人 红尘惆怅客 浮生寂寞人</p>
-                                    </div>
-                                    <div className='footer'>
-                                        <span>
-                                            <Icon type="heart"/>
-                                            <i>3</i>
-                                        </span>
-                                        <span>
-                                            <Icon type="message" />
-                                            <i>100</i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className='right'>
-                                    <div className='imgBox'>
-                                        <img
-                                            src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1288375098,338412828&fm=173&app=12&f=JPEG?w=218&h=146&s=67409947C62A0515078A302A03001012"
-                                            alt=""/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='showBox'>
-                                <div className='left'>
-                                    <div className='info'>
-                                        <Avatar icon="user"/>
-                                        <span style={{color: '#333333', fontSize: 12, marginLeft: 8}}>余博文</span>
-                                        <span style={{color: '#999999', fontSize: 12, marginLeft: 8}}>2018-04-03</span>
-                                    </div>
-                                    <div className='articleTitle'>
-                                        <div>我～走出去了</div>
-                                    </div>
-                                    <div className='Fragment'>
-                                        <p>三原则：图原创，文原创，诗原创。 一扇门 推开是红尘 关上是浮生 一个人 红尘惆怅客 浮生寂寞人</p>
-                                    </div>
-                                    <div className='footer'>
-                                        <span>
-                                            <Icon type="heart"/>
-                                            <i>3</i>
-                                        </span>
-                                        <span>
-                                            <Icon type="message" />
-                                            <i>100</i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className='right'>
-                                    <div className='imgBox'>
-                                        <img
-                                            src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1288375098,338412828&fm=173&app=12&f=JPEG?w=218&h=146&s=67409947C62A0515078A302A03001012"
-                                            alt=""/>
-                                    </div>
-                                </div>
-                            </div>
+                            {this._renderArticles(articlesList)}
                         </div>
                     </div>
                     <div className='rightContent'>
                         <div className='authors'>
                             <h3 style={{color: '#969696'}}>推荐作者</h3>
-                            <div className='block'>
-                                <div className='avatar'>
-                                    <Avatar size='large' icon="user"/>
-                                </div>
-                                <div style={{marginLeft: 5}}>
-                                    <div className="infoTop">
-                                        <span>余博文</span>
-                                        <a href='javascript:void(0)' className='guanz'>+关注</a>
-                                    </div>
-                                    <div className='authorsInfo'>
-                                        <span>写了100篇</span>
-                                        <span>获得100个喜欢</span>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {this._renderUsers(userList)}
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ class Register extends Component {
                 }).then(res=>{
                     if(res.data.result&&res.data.result.code===1){
                         message.success('注册成功');
-                        this.props.history.push('/');
+                        this.props.history.push('/manage');
                     }else{
                         message.error(res.data.error)
                     }

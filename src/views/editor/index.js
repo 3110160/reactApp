@@ -17,6 +17,7 @@ class editorDemo extends Component {
         }
     }
     saveArticle(){
+        console.log(this.state.content)
         this.setState({
             visible: true,
         });
@@ -27,7 +28,7 @@ class editorDemo extends Component {
             visible: false,
         });
         let {content} = this.state;
-        axios.post('/saveArticle',{
+        axios.post('/addArticle',{
             title:'1414',
             content:content
         })
@@ -104,7 +105,6 @@ class editorDemo extends Component {
                            >
                                {this.renderOptions()}
                            </Select>
-
                        </div>
                    </div>
                 </Modal>

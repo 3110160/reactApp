@@ -1,33 +1,35 @@
 .blog{
-  padding: 58px 200px 100px 200px;
+  padding: 58px 0 100px 0;
   .header{
     width: 100%;
     background-color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1024;
     line-height: 56px;
-    box-sizing: border-box;
-    padding: 0 200px;
     border-bottom: 1px solid #f0f0f0;
-    .logo{
-      width: 120px;
-    }
-    .searchBar{
-      flex: 1;
-    }
-    .btns{
-      flex: 1;
+    .content{
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      width: 1024px;
+      margin: 0 auto;
+      .logo{
+        width: 120px;
+      }
+      .searchBar{
+        flex: 1;
+      }
+      .btns{
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 }
